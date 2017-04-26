@@ -1,4 +1,6 @@
-﻿using SportStore.WebUI.Infrastructure;
+﻿using SportStore.Domain.Entities;
+using SportStore.WebUI.Binders;
+using SportStore.WebUI.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +17,7 @@ namespace SportStore.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
