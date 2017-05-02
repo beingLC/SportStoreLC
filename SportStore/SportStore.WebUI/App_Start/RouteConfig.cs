@@ -20,6 +20,7 @@ namespace SportStore.WebUI
                     controller = "Product", action = "List", category=(string)null,page=1
                 }
                 );
+            //Page 值{page}
             routes.MapRoute(null,
                 "Page{page}",
                 new

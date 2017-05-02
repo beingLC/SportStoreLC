@@ -10,7 +10,7 @@
 }
 
 <div class="pager">
-    @Html.PageLinks(Model.pagingInfo,x=>Url.Action("List",new { page=x,category=Model.CurrentCategory}))
+    @Html.PageLinks(Model.pagingInfo, x => Url.Action("List", new {Category = Model.CurrentCategory, Page = x }))
 </div>
 <h2>List</h2>
 
