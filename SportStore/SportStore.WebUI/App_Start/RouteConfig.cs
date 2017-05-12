@@ -17,7 +17,7 @@ namespace SportStore.WebUI
                 "",
                 new
                 {
-                    controller = "Product", action = "List", category=(string)null,page=1
+                    controller = "Account", action = "Login"
                 }
                 );
             //Page 值{page}

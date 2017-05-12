@@ -23,6 +23,11 @@ namespace SportStore.WebUI.Controllers
         {
             return View(new CartIndexViewModel { Cart = cart, ReturnUrl = returnUrl});
         }
+        public PartialViewResult CartDetails(Cart cart, string returnUrl)
+        {
+            return PartialView(new CartIndexViewModel { Cart = cart, ReturnUrl = returnUrl });
+        }
+    
         //public RedirectToRouteResult AddToCart(Cart cart,int productId, string returnUrl)
         //{
         //    Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
@@ -32,6 +37,7 @@ namespace SportStore.WebUI.Controllers
         //    }
         //    return RedirectToAction("Index", new { returnUrl });
         //}
+        [Authorize(Users ="wanghuan_kf@smec-cn.com")]
         public void AddToCart(Cart cart, int productId,string returnUrl)
         {
             Product product = repository.Products.FirstOrDefault(p => p.ProductID == productId);
@@ -39,7 +45,7 @@ namespace SportStore.WebUI.Controllers
             {
                 cart.AddItem(product, 1);
             }
-            Response.Redirect("/");
+            Response.Redirect("/Product/List");
         }
         public RedirectToRouteResult RemoveFromCart(Cart cart,int productId,string returnUrl)
         {
