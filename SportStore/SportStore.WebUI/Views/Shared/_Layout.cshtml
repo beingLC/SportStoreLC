@@ -1,54 +1,48 @@
 ﻿<!DOCTYPE html>
-<html>
+
+<html lang="zh-cn">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
-    <link href="~/Content/Site.css" type="text/css" rel="stylesheet"/>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <title>@ViewBag.Title</title>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("应用程序名称", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="3000" style="float:none;display:block;margin:auto">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="~/Content/images/11.jpg" alt="First slide"/>
+                <div class="carousel-caption">美丽家园</div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("主页", "Index", "Home")</li>
-                    <li>@Html.ActionLink("关于", "About", "Home")</li>
-                    <li>@Html.ActionLink("联系方式", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+            <div class="item">
+                <img src="~/Content/images/12.jpeg" alt="Second slide"/>
+                <div class="carousel-caption">华丽宫殿</div>
+            </div>
+            <div class="item">
+                <img src="~/Content/images/13.jpeg" alt="Third slide"/>
+                <div class="carousel-caption">魅力上海</div>
             </div>
         </div>
+        <a class="carousel-control left" href="#myCarousel"
+           data-slide="prev">
+            &lsaquo;
+        </a>
+        <a class="carousel-control right" href="#myCarousel"
+           data-slide="next">
+            &rsaquo;
+        </a>
     </div>
-    <div id="header">
-        @{Html.RenderAction("Summary", "Cart"); }
-        <div class="title">SPORT STORE</div>
-    </div>
-    <div id="categories">
-        @{Html.RenderAction("Menu", "Nav"); }
-    </div>
-    <div id="content">
+    <div class="container-fluid">
         @RenderBody()
     </div>
-    @*<div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
-        </footer>
-    </div>*@
-
+ 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

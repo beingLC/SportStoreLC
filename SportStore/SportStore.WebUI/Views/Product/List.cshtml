@@ -3,14 +3,16 @@
 @using SportStore.WebUI.HtmlHelpers
 @{
     ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/_ProductLayout.cshtml";
 }
-@foreach(var p in Model.Products)
+@foreach (var p in Model.Products)
 {
     Html.RenderPartial("ProductSummary", p);
+
 }
 
-<div class="pager">
+<div class="pager" style="float:right">
     @Html.PageLinks(Model.pagingInfo, x => Url.Action("List", new {Category = Model.CurrentCategory, Page = x }))
 </div>
-<h2>List</h2>
+<h2>Have Fun</h2>
 

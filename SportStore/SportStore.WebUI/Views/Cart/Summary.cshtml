@@ -1,9 +1,98 @@
 ﻿@model SportStore.Domain.Entities.Cart
-<div id="cart">
-    <span class="caption">
-        <b>Your cart:</b>
-        @Model.Lines.Sum(x=>x.Quantity)item(s),
-        @Model.ComputeTotalValue().ToString("c")
-    </span>
-    @Html.ActionLink("Checkout", "Index", "Cart", new { returnUrl=Request.Url.PathAndQuery},null)
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script>
+        function showDetail() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("CartDetails").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "/Cart/CartDetails", true);
+            xmlhttp.send();
+        }
+    </script>*@
+</head>
+<body>
+    <div class="col-md-offset-8 col-md-4">
+        <span class="caption">
+            <b>Your cart:</b>
+            @Model.Lines.Sum(x => x.Quantity)item(s),
+            &nbsp
+            @Model.ComputeTotalValue().ToString("c")
+            &nbsp
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+            Cart Details
+        </button>
+        @Html.ActionLink("Checkout", "Index", "Cart", new { returnUrl = Request.Url.PathAndQuery }, new {@class="btn btn-primary" })
+        
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Cart Details
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    @*<div id="CartDetails"></div>*@
+                    <table width="90" align="center">
+                        <thead>
+                            <tr>
+                                <th align="center">Quantity</th>
+                                <th align="right" >Item</th>
+                                <th align="right">Price</th>
+                                <th align="right">Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var line in Model.Lines)
+                            {
+                                <tr>
+                                    <td align="center">@line.Quantity</td>
+                                    <td align="right">@line.Product.Name</td>
+                                    <td align="right">@line.Product.Price.ToString("c")</td>
+                                    <td align="right">@((line.Quantity * line.Product.Price).ToString("c"))</td>
+                                </tr>
+                            }
+                        </tbody>
+                       
+                        <tfoot>
+                            <tr>
+                                <td colspan="3" align="right">Total:</td>
+                                <td align="right">
+                                    @Model.ComputeTotalValue().ToString("c")
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</body>
+</html>
